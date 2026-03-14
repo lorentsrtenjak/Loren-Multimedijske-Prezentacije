@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loren Trstenjak</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --ink: #1a1814;
+      --ink-muted: #6b6760;
+      --ink-faint: #b0ada8;
+      --accent: #2d5a3d;
+      --accent-light: #e8f0eb;
+      --border: #e2dfd8;
+      --serif: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 7rem 2.5rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* ── SECTION ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+      border-color: #c5c0b8;
+    }
+
+    .card-number {
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      color: var(--ink-faint);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+
+    .card-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      grid-column: 1 / -1;
+      padding: 3rem 2rem;
+      text-align: center;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius);
+      color: var(--ink-faint);
+      font-size: 0.9rem;
+    }
+
+    .empty strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+    .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-desc    { animation: fadeUp 0.6s 0.2s ease both; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">Loren Trstenjak</a>
+    <ul class="nav-links">
+      <li><a href="#vjezbe" class="active">Vježbe</a></li>
+      <li><a href="#zadace">Zadaće</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <span class="hero-eyebrow">Multimedijske prezentacije</span>
+    <h1>Loren<br><em>Trstenjak</em></h1>
+    <p class="hero-desc">
+      Dobrodošli na moj studentski portal. Ovdje možete pronaći sve vježbe i zadaće izrađene u sklopu kolegija.
+    </p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- VJEŽBE -->
+  <section id="vjezbe">
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <h2 class="section-title">Vježbe</h2>
+    </div>
+    <div class="grid" id="vjezbe-grid">
+      <div class="card">
+        <div class="card-number">Vježba 01</div>
+        <div class="card-title">Naziv vježbe 1</div>
+        <div class="card-meta">Tjedan 1</div>
+        <span class="card-badge" style="background:#f3f0e8;color:#8a8479;">U tijeku</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ZADAĆE -->
+  <section id="zadace">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2 class="section-title">Zadaće</h2>
+    </div>
+    <div class="grid" id="zadace-grid">
+      <div class="card">
+        <div class="card-number">Zadaća 01</div>
+        <div class="card-title">Naziv zadaće 1</div>
+        <div class="card-meta">Rok: —</div>
+        <span class="card-badge" style="background:#f3f0e8;color:#8a8479;">U tijeku</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Loren Trstenjak · Multimedijske prezentacije
+  </footer>
+
+</body>
+</html>
