@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loren Trstenjak</title>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg: #f7f5f0;
       --surface: #ffffff;
@@ -21,9 +19,7 @@
       --sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       --radius: 12px;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--sans);
       background: var(--bg);
@@ -32,7 +28,6 @@
       line-height: 1.7;
       min-height: 100vh;
     }
-
     /* ── NAV ── */
     nav {
       position: sticky;
@@ -47,21 +42,18 @@
       justify-content: space-between;
       height: 60px;
     }
-
     .nav-logo {
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-size: 1.2rem;
       color: var(--ink);
       text-decoration: none;
       letter-spacing: -0.01em;
     }
-
     .nav-links {
       display: flex;
       gap: 2rem;
       list-style: none;
     }
-
     .nav-links a {
       font-size: 0.875rem;
       font-weight: 500;
@@ -70,17 +62,14 @@
       letter-spacing: 0.02em;
       transition: color 0.2s;
     }
-
     .nav-links a:hover,
     .nav-links a.active { color: var(--accent); }
-
     /* ── HERO ── */
     .hero {
       padding: 7rem 2.5rem 5rem;
       max-width: 900px;
       margin: 0 auto;
     }
-
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
@@ -92,7 +81,6 @@
       color: var(--accent);
       margin-bottom: 1.5rem;
     }
-
     .hero-eyebrow::before {
       content: '';
       display: block;
@@ -100,42 +88,36 @@
       height: 1.5px;
       background: var(--accent);
     }
-
     .hero h1 {
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-size: clamp(2.8rem, 6vw, 4.5rem);
       line-height: 1.1;
       letter-spacing: -0.02em;
-      color: var(--ink);
+      color: var(--accent);
       margin-bottom: 1.5rem;
     }
-
     .hero h1 em {
-      font-style: italic;
+      font-style: normal;
       color: var(--accent);
     }
-
     .hero-desc {
       font-size: 1.1rem;
       color: var(--ink-muted);
       max-width: 520px;
       line-height: 1.8;
     }
-
     /* ── SECTION ── */
     section {
       max-width: 900px;
       margin: 0 auto;
       padding: 5rem 2.5rem;
     }
-
     .section-header {
       display: flex;
       align-items: baseline;
       gap: 1rem;
       margin-bottom: 3rem;
     }
-
     .section-label {
       font-size: 0.75rem;
       font-weight: 500;
@@ -143,29 +125,25 @@
       text-transform: uppercase;
       color: var(--ink-faint);
     }
-
     .section-title {
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-size: clamp(1.8rem, 3.5vw, 2.5rem);
       letter-spacing: -0.02em;
       color: var(--ink);
       line-height: 1.15;
     }
-
     .section-divider {
       height: 1px;
       background: var(--border);
       max-width: 900px;
       margin: 0 auto;
     }
-
     /* ── GRID ── */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1.25rem;
     }
-
     /* ── CARD ── */
     .card {
       background: var(--surface);
@@ -173,70 +151,77 @@
       border-radius: var(--radius);
       padding: 1.5rem;
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-      cursor: pointer;
-      text-decoration: none;
       color: inherit;
       display: block;
     }
-
     .card:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.07);
       border-color: #c5c0b8;
     }
-
     .card-number {
-      font-family: var(--serif);
-      font-size: 0.85rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
       color: var(--ink-faint);
-      margin-bottom: 0.75rem;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
       margin-bottom: 0.4rem;
+    }
+    .card-title {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
       line-height: 1.4;
     }
-
-    .card-meta {
-      font-size: 0.8rem;
-      color: var(--ink-muted);
+    .card-title a {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
     }
-
-    .card-badge {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 0.7rem;
+    .card-title a:hover { color: var(--accent); }
+    .card-tasks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .task-chip {
+      font-family: var(--sans);
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 100px;
+      letter-spacing: 0.02em;
+      padding: 5px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      color: var(--ink-muted);
+      background: var(--bg);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+      display: inline-block;
+    }
+    .task-chip:hover {
       background: var(--accent-light);
       color: var(--accent);
+      border-color: #b8d4c0;
+      transform: translateY(-1px);
     }
-
-    /* ── EMPTY STATE ── */
-    .empty {
-      grid-column: 1 / -1;
-      padding: 3rem 2rem;
-      text-align: center;
-      border: 1.5px dashed var(--border);
-      border-radius: var(--radius);
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1rem;
+    }
+    .card-badge {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--ink-faint);
-      font-size: 0.9rem;
     }
-
-    .empty strong {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      color: var(--ink-muted);
-      margin-bottom: 0.5rem;
-    }
-
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -246,20 +231,17 @@
       color: var(--ink-faint);
       letter-spacing: 0.02em;
     }
-
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .hero-eyebrow { animation: fadeUp 0.5s ease both; }
     .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
     .hero-desc    { animation: fadeUp 0.6s 0.2s ease both; }
   </style>
 </head>
 <body>
-
   <nav>
     <a class="nav-logo" href="#">Loren Trstenjak</a>
     <ul class="nav-links">
@@ -284,23 +266,24 @@
       <span class="section-label">01</span>
       <h2 class="section-title">Vježbe</h2>
     </div>
-    <div class="grid" id="vjezbe-grid">
-<a href="Loren_Trstenjak.html" class="card">
-  <div class="card-number">Vježba 01</div>
+    <div class="grid">
 
-  <div class="card-title">HTML osnove</div>
+      <div class="card">
+        <div class="card-number">Vježba 01</div>
+        <div class="card-title"><a href="Loren_Trstenjak.html">HTML osnove</a></div>
+        <div class="card-tasks">
+          <a href="Loren_Trstenjak.html#zad1" class="task-chip">Zadatak 1</a>
+          <a href="Loren_Trstenjak.html#zad2" class="task-chip">Zadatak 2</a>
+          <a href="Loren_Trstenjak.html#zad3" class="task-chip">Zadatak 3</a>
+          <a href="Loren_Trstenjak.html#zad4" class="task-chip">Zadatak 4</a>
+          <a href="Loren_Trstenjak.html#zad5" class="task-chip">Zadatak 5</a>
+          <a href="Loren_Trstenjak.html#zad6" class="task-chip">Zadatak 6</a>
+        </div>
+        <div class="card-divider"></div>
+        <span class="card-badge">Završeno</span>
+      </div>
 
-  <div class="card-meta">
-    <a href="Loren_Trstenjak.html#zad1">Zadatak 1</a> ·
-    <a href="Loren_Trstenjak.html#zad2">Zadatak 2</a> ·
-    <a href="Loren_Trstenjak.html#zad3">Zadatak 3</a><br>
-    <a href="Loren_Trstenjak.html#zad4">Zadatak 4</a> ·
-    <a href="Loren_Trstenjak.html#zad5">Zadatak 5</a> ·
-    <a href="Loren_Trstenjak.html#zad6">Zadatak 6</a>
-  </div>
-
-  <span class="card-badge" style="background:#f3f0e8;color:#8a8479;">Završeno</span>
-</a>
+    </div>
   </section>
 
   <div class="section-divider"></div>
@@ -311,12 +294,12 @@
       <span class="section-label">02</span>
       <h2 class="section-title">Zadaće</h2>
     </div>
-    <div class="grid" id="zadace-grid">
+    <div class="grid">
       <div class="card">
         <div class="card-number">Zadaća 01</div>
         <div class="card-title">Naziv zadaće 1</div>
-        <div class="card-meta">Rok: —</div>
-        <span class="card-badge" style="background:#f3f0e8;color:#8a8479;">U tijeku</span>
+        <div class="card-meta" style="font-size:0.8rem;color:var(--ink-muted);">Rok: —</div>
+        <span class="card-badge">U tijeku</span>
       </div>
     </div>
   </section>
@@ -324,6 +307,5 @@
   <footer>
     © 2026 Loren Trstenjak · Multimedijske prezentacije
   </footer>
-
 </body>
 </html>
