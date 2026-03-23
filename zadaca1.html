@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sila i gibanje | Loren Trstenjak</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --ink: #1a1814;
+      --ink-muted: #6b6760;
+      --ink-faint: #b0ada8;
+      --accent: #2d5a3d;
+      --accent-light: #e8f0eb;
+      --border: #e2dfd8;
+      --sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 7rem 2.5rem 4.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      max-width: 650px;
+      line-height: 1.8;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4.5rem 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      margin-bottom: 1.5rem;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+      border-color: #c5c0b8;
+    }
+
+    .card-number {
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .card p {
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+
+    .info-table td {
+      vertical-align: top;
+      padding: 1rem 1.2rem 1rem 0;
+      border: none;
+    }
+
+    .info-table td:first-child {
+      width: 180px;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .highlight {
+      background: var(--accent-light);
+      border: 1px solid #d7e6dc;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      color: var(--ink);
+      margin-top: 1.2rem;
+    }
+
+    .links-list,
+    .literature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .links-list li,
+    .literature-list li {
+      margin-bottom: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .links-list a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .links-list a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+    .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-desc    { animation: fadeUp 0.6s 0.2s ease both; }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 0 1.2rem;
+      }
+
+      .hero,
+      section {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+      }
+
+      .info-table,
+      .info-table tbody,
+      .info-table tr,
+      .info-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .info-table td {
+        padding: 0.5rem 0;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="#">Loren Trstenjak</a>
+    <ul class="nav-links">
+      <li><a href="#uvod" class="active">Uvod</a></li>
+      <li><a href="#tema">Tema</a></li>
+      <li><a href="#literatura">Literatura</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero" id="uvod">
+    <span class="hero-eyebrow">Multimedijske prezentacije · Zadaća</span>
+    <h1>Sila i gibanje</h1>
+    <p class="hero-desc">
+      U svakodnevnom životu stalno promatramo gibanje: hodamo, vozimo bicikl, bacamo loptu ili kočimo automobil.
+      Iza svih tih pojava nalaze se sila, masa, ubrzanje i tromost. Na ovoj stranici jednostavno je objašnjeno
+      kako sila utječe na gibanje tijela i zašto se neka tijela lakše pokreću, a neka teže mijenjaju svoje stanje.
+    </p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <section id="tema">
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <h2 class="section-title">Obrada teme</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Osnovni pojmovi</div>
+      <div class="card-title">Što su sila i gibanje?</div>
+
+      <table class="info-table">
+        <tr>
+          <td>Gibanje</td>
+          <td>
+            Gibanje znači da tijelo s vremenom mijenja svoj položaj. Automobil na cesti, lopta u zraku i bicikl u vožnji
+            primjeri su gibanja koje možemo lako uočiti u svakodnevici.
+          </td>
+        </tr>
+        <tr>
+          <td>Sila</td>
+          <td>
+            Sila je uzrok promjene gibanja. Kada guramo kolica, povlačimo vrata ili udarimo loptu, djelujemo silom.
+            Sila može pokrenuti tijelo, zaustaviti ga ili mu promijeniti smjer kretanja.
+          </td>
+        </tr>
+        <tr>
+          <td>Veza među njima</td>
+          <td>
+            Tijelo se neće početi gibati samo od sebe ako na njega ne djeluje neka sila. Isto tako, tijelo koje se već giba
+            može promijeniti brzinu tek kada na njega djeluje sila ili više sila zajedno.
+          </td>
+        </tr>
+      </table>
+
+      <div class="highlight">
+        Drugim riječima, sila i gibanje su povezani: sila utječe na to hoće li tijelo mirovati, ubrzavati, usporavati ili skretati.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Promjena brzine</div>
+      <div class="card-title">Akceleracija i jednoliko ubrzano gibanje</div>
+
+      <p>
+        Kada se brzina tijela mijenja, kažemo da tijelo ima akceleraciju. Ako se automobil pri kretanju sa semafora kreće
+        sve brže, njegova se brzina povećava i akceleracija je pozitivna. Ako koči, brzina se smanjuje pa govorimo o usporavanju.
+      </p>
+
+      <p>
+        Jednoliko ubrzano gibanje događa se kada se brzina povećava za jednak iznos u jednakim vremenskim razmacima.
+        To se može zamisliti kao gibanje pri kojem tijelo svake sekunde “dobije” isto dodatno ubrzanje.
+      </p>
+
+      <p>
+        Takvo gibanje važno je jer nam pomaže razumjeti kako se pokreću vozila, kako tijela padaju i zašto neka gibanja
+        možemo matematički jednostavno opisati.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Pad i ubrzanje</div>
+      <div class="card-title">Slobodni pad</div>
+
+      <p>
+        Kada neko tijelo pada prema tlu pod utjecajem Zemljine teže, govorimo o slobodnom padu. U idealnom slučaju,
+        bez utjecaja otpora zraka, sva tijela padaju s jednakim ubrzanjem.
+      </p>
+
+      <p>
+        U stvarnosti ipak vidimo razliku između papira i bilježnice. Papir sporije pada zato što na njega zrak djeluje jače
+        u odnosu na njegovu masu. Zato nam se ponekad čini da lakša tijela nužno padaju sporije, iako uzrok nije sama masa
+        nego i otpor zraka.
+      </p>
+
+      <div class="highlight">
+        Slobodni pad pokazuje da gibanje nije uvijek posljedica guranja rukom ili motora — ponekad je dovoljna sila teža.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Tromost tijela</div>
+      <div class="card-title">Zašto se neka tijela teže pokreću?</div>
+
+      <p>
+        Svako tijelo se opire promjeni svojega stanja gibanja. To svojstvo zove se tromost. Zbog tromosti tijelo koje miruje
+        želi ostati u mirovanju, a tijelo koje se giba želi nastaviti gibanje.
+      </p>
+
+      <p>
+        Veća masa znači i veću tromost. Zato je lakše pokrenuti loptu nego ormar, a lakše zaustaviti romobil nego automobil.
+        Masa nam, dakle, govori koliko se tijelo “protivi” promjeni gibanja.
+      </p>
+
+      <p>
+        Tromost je važna i zbog sigurnosti u prometu. Kada autobus naglo zakoči, putnici se nastavljaju gibati prema naprijed
+        jer njihovo tijelo nastoji zadržati prethodno stanje gibanja.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Drugi Newtonov zakon</div>
+      <div class="card-title">Kako sila i masa određuju ubrzanje?</div>
+
+      <p>
+        Ako na tijelo djeluje veća sila, ono će dobiti veće ubrzanje. Ali ubrzanje ne ovisi samo o sili, nego i o masi tijela.
+        Tijelo manje mase lakše mijenja brzinu, dok tijelo veće mase traži jače djelovanje da bi postiglo isti učinak.
+      </p>
+
+      <p>
+        To znači da će ista sila jače ubrzati lagani predmet nego teški. Zato je lakše baciti tenisku lopticu nego medicinku,
+        iako na obje možemo djelovati na sličan način rukom.
+      </p>
+
+      <div class="highlight">
+        Što je sila veća, ubrzanje je veće. Što je masa veća, ubrzanje je manje.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Zaključak</div>
+      <div class="card-title">Sila i gibanje u svakodnevnom životu</div>
+
+      <p>
+        Pojmovi sila i gibanje nisu samo školska tema nego i dio svakodnevice. Vidimo ih u prometu, sportu, igri,
+        pri padu predmeta i pri svakom pokretanju ili zaustavljanju tijela.
+      </p>
+
+      <p>
+        Razumijevanjem sile, akceleracije, slobodnog pada i tromosti lakše shvaćamo zašto se tijela gibaju baš tako kako se gibaju.
+        Fizika nam tako pomaže da obične pojave oko sebe promatramo jasnije, logičnije i dublje.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="literatura">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2 class="section-title">Literatura i poveznice</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Korištena literatura</div>
+      <div class="card-title">Udžbenici</div>
+      <ul class="literature-list">
+        <li>Fizika za 8. razred osnovne škole – udžbenik korišten za obradu nastavne cjeline o sili i gibanju.</li>
+        <li>Dodatni školski materijali i bilješke povezane s nastavnom temom gibanja i djelovanja sile.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Preporučeni sadržaji</div>
+      <div class="card-title">Poveznice za učenike koji žele saznati više</div>
+      <ul class="links-list">
+        <li><a href="https://hr.wikipedia.org/wiki/Sila" target="_blank">Sila – objašnjenje pojma</a></li>
+        <li><a href="https://hr.wikipedia.org/wiki/Gibanje" target="_blank">Gibanje – osnovne informacije</a></li>
+        <li><a href="https://hr.wikipedia.org/wiki/Newtonovi_zakoni" target="_blank">Newtonovi zakoni gibanja</a></li>
+        <li><a href="https://hr.wikipedia.org/wiki/Slobodni_pad" target="_blank">Slobodni pad</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Loren Trstenjak · Multimedijske prezentacije
+  </footer>
+</body>
+</html>
