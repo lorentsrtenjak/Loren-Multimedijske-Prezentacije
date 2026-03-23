@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vježba 2 | Loren Trstenjak</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --ink: #1a1814;
+      --ink-muted: #6b6760;
+      --ink-faint: #b0ada8;
+      --accent: #2d5a3d;
+      --accent-light: #e8f0eb;
+      --border: #e2dfd8;
+      --sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-size: 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 7rem 2.5rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .task-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .task-block h3 {
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .task-block img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .zad2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .zad2-grid .banner {
+      grid-column: 1 / -1;
+    }
+
+    .zad2-grid img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+      background: white;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 1.2rem; }
+      .hero, section { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .zad2-grid { grid-template-columns: 1fr; }
+      .zad2-grid .banner { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">Loren Trstenjak</a>
+    <ul class="nav-links">
+      <li><a href="#vjezba2" class="active">Vježba 2</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <span class="hero-eyebrow">Multimedijske prezentacije</span>
+    <h1>Vježba 2</h1>
+    <p class="hero-desc">
+      Obrada slika i prikaz zadataka izrađenih u programu Pixelmator Pro.
+    </p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <section id="vjezba2">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2 class="section-title">Zadaci</h2>
+    </div>
+
+    <div class="task-block" id="zad1">
+      <h3>Zadatak 1</h3>
+      <img src="pixelmatorpro.jpg" alt="Zadatak 1 - Pixelmator Pro Crop alat">
+    </div>
+
+    <div class="task-block" id="zad2">
+      <h3>Zadatak 2</h3>
+      <div class="zad2-grid">
+        <img src="banner.jpg" alt="Banner" class="banner">
+        <img src="slika1_1.jpg" alt="Slika 1">
+        <img src="slika1_2.jpg" alt="Slika 2">
+        <img src="slika1_3.jpg" alt="Slika 3">
+        <img src="slika2_1.jpg" alt="Slika 4">
+        <img src="slika2_2.jpg" alt="Slika 5">
+        <img src="slika2_3.jpg" alt="Slika 6">
+      </div>
+    </div>
+
+    <div class="task-block" id="zad3">
+      <h3>Zadatak 3</h3>
+      <img src="analizator1.gif" alt="Zadatak 3 - Analizator">
+    </div>
+
+    <div class="task-block" id="zad4">
+      <h3>Zadatak 4</h3>
+      <img src="labos.jpg" alt="Zadatak 4 - Labos">
+    </div>
+
+    <div class="task-block" id="zad5">
+      <h3>Zadatak 5</h3>
+      <img src="more1.jpg" alt="Zadatak 5 - More">
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Loren Trstenjak · Multimedijske prezentacije
+  </footer>
+</body>
+</html>
