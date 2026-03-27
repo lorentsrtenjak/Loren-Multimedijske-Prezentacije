@@ -1,1 +1,454 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vježba 3 | Loren Trstenjak</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --ink: #1a1814;
+      --ink-muted: #6b6760;
+      --ink-faint: #b0ada8;
+      --accent: #2d5a3d;
+      --accent-light: #e8f0eb;
+      --border: #e2dfd8;
+      --sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-size: 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+    
+    .hero {
+      padding: 7rem 2.5rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    /* fotke */
+    .photo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .photo-card .card-image {
+      overflow: hidden;
+      background: var(--bg);
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-card .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-card .card-content {
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid var(--border);
+    }
+
+    .card-number {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.6rem;
+    }
+
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+    }
+
+    /* grid */
+    .originals-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2.5rem 5rem;
+    }
+
+    .originals-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .originals-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .originals-title {
+      font-family: var(--sans);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .originals-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .original-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .original-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .original-item span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--ink-faint);
+      padding: 0.5rem 0.4rem;
+      letter-spacing: 0.02em;
+      border-top: 1px solid var(--border);
+      word-break: break-all;
+    }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.02em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      nav { padding: 0 1.2rem; }
+      .hero, section, .originals-section { padding-left: 1.2rem; padding-right: 1.2rem; }
+
+      .photo-card {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-card .card-image {
+        min-height: 220px;
+      }
+
+      .photo-card .card-content {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 1.5rem;
+      }
+
+      .originals-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .originals-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="https://lorentsrtenjak.github.io/Loren-Multimedijske-Prezentacije/">Loren Trstenjak</a>
+    <ul class="nav-links">
+      <li><a href="#sile" class="active">Vježba 3</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <span class="hero-eyebrow">Multimedijske prezentacije</span>
+    <h1>Vježba 3</h1>
+    <p class="hero-desc">
+      Primjeri djelovanja sila u svakodnevnom životu — fotografije s naslovom i opisom fizikalnih pojava.
+    </p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <section id="sile">
+    <div class="section-header">
+      <span class="section-label">03</span>
+      <h2 class="section-title">Sile u svakodnevnom životu</h2>
+    </div>
+
+    <!-- 1. Avioncek -->
+    <div class="photo-card" id="avion">
+      <div class="card-image">
+        <img src="Avioncek.jpg" alt="Avion u letu">
+      </div>
+      <div class="card-content">
+        <span class="card-number">01 · Avion</span>
+        <h3 class="card-title">Gibanje aviona pod djelovanjem sile pogona</h3>
+        <p class="card-desc">
+          Avion se giba zahvaljujući sili pogona koju stvaraju motori. Ta sila djeluje u smjeru gibanja i omogućuje ubrzavanje i održavanje brzine tijekom leta.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. Torta -->
+    <div class="photo-card" id="torta">
+      <div class="card-image">
+        <img src="Torta.jpg" alt="Rezanje torte">
+      </div>
+      <div class="card-content">
+        <span class="card-number">02 · Torta</span>
+        <h3 class="card-title">Djelovanje kontaktne sile pri rezanju</h3>
+        <p class="card-desc">
+          Nož djeluje kontaktnom silom na tortu, uzrokujući deformaciju i razdvajanje materijala. Tijekom rezanja pojavljuje se i trenje između noža i torte.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. ribica -->
+    <div class="photo-card" id="riba">
+      <div class="card-image">
+        <img src="ribica.jpg" alt="Riba u vodi">
+      </div>
+      <div class="card-content">
+        <span class="card-number">03 · Riba</span>
+        <h3 class="card-title">Ravnoteža sila u vodi</h3>
+        <p class="card-desc">
+          Na ribu djeluju gravitacijska sila prema dolje i sila uzgona prema gore. Kada su te sile uravnotežene, riba ostaje na istoj dubini. Također se javlja sila pogona kojom se riba kreće kroz vodu.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. jona -->
+    <div class="photo-card" id="bicikl">
+      <div class="card-image">
+        <img src="Jona.jpg" alt="Bicikl u vožnji">
+      </div>
+      <div class="card-content">
+        <span class="card-number">04 · Bicikl</span>
+        <h3 class="card-title">Gibanje bicikla pod djelovanjem sile</h3>
+        <p class="card-desc">
+          Bicikl se pokreće zahvaljujući sili pogona koju stvara osoba. Ta sila uzrokuje gibanje u određenom smjeru, dok trenje između kotača i tla omogućuje stabilno kretanje.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5. jim -->
+    <div class="photo-card" id="teretana">
+      <div class="card-image">
+        <img src="jim.jpg" alt="Podizanje utega u teretani">
+      </div>
+      <div class="card-content">
+        <span class="card-number">05 · Teretana</span>
+        <h3 class="card-title">Djelovanje mišićne sile pri podizanju utega</h3>
+        <p class="card-desc">
+          Prilikom podizanja utega djeluju mišićne sile koje savladavaju gravitacijsku silu. U ravnotežnom položaju sile su izjednačene, a pri podizanju mišićna sila mora biti veća od sile teže.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Originali -->
+  <div class="originals-section" id="originali">
+    <div class="originals-header">
+      <span class="originals-label">Originali</span>
+      <h2 class="originals-title">Originalne fotografije</h2>
+    </div>
+
+    <div class="originals-grid">
+      <div class="original-item">
+        <img src="avioncek_org.jpg" alt="Avion original">
+        <span>avioncek_org.jpg</span>
+      </div>
+      <div class="original-item">
+        <img src="torta_org.jpg" alt="Torta original">
+        <span>torta_org.jpg</span>
+      </div>
+      <div class="original-item">
+        <img src="ribica_org.jpg" alt="Ribica original">
+        <span>ribica_org.jpg</span>
+      </div>
+      <div class="original-item">
+        <img src="jona_org.jpg" alt="Jona original">
+        <span>jona_org.jpg</span>
+      </div>
+      <div class="original-item">
+        <img src="jim_org.jpg" alt="Jim original">
+        <span>jim_org.jpg</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Loren Trstenjak · Multimedijske prezentacije
+  </footer>
+
+</body>
+</html>
